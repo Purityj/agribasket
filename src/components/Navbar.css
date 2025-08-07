@@ -1,0 +1,201 @@
+/* Navbar.css */
+:root {
+  --primary-color: #2e7d32;
+  --secondary-color: #4caf50;
+  --text-color: #333;
+  --text-light: #fff;
+  --transition: all 0.3s ease;
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 1.5rem 0;
+  z-index: 1000;
+  transition: var(--transition);
+  background-color: var(--primary-color); /* Start with solid color */
+}
+
+.navbar.scrolled {
+  background-color: var(--text-light);
+  box-shadow: var(--shadow);
+  padding: 1rem 0;
+}
+
+.navbar-container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-logo {
+  display: flex;
+  flex-direction: column;
+  color: var(--text-light);
+  font-weight: 700;
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.navbar.scrolled .navbar-logo {
+  color: var(--primary-color);
+}
+
+.logo-text {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.logo-subtext {
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 1px;
+}
+
+.navbar-menu {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-item {
+  margin-left: 2.5rem;
+}
+
+.navbar-link {
+  position: relative;
+  color: var(--text-light);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1rem;
+  transition: var(--transition);
+  padding: 0.5rem 0;
+}
+
+.navbar.scrolled .navbar-link {
+  color: var(--text-color);
+}
+
+.navbar-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--secondary-color);
+  transition: var(--transition);
+}
+
+.navbar-link:hover::after,
+.navbar-link.active::after {
+  width: 100%;
+}
+
+.navbar-link:hover,
+.navbar-link.active {
+  color: var(--secondary-color);
+}
+
+.navbar.scrolled .navbar-link:hover,
+.navbar.scrolled .navbar-link.active {
+  color: var(--secondary-color);
+}
+
+.navbar-toggle {
+  display: none;
+  cursor: pointer;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 21px;
+  z-index: 1001;
+}
+
+.bar {
+  height: 3px;
+  width: 100%;
+  background-color: var(--text-light);
+  transition: var(--transition);
+}
+
+.navbar.scrolled .bar {
+  background-color: var(--primary-color);
+}
+
+.navbar-toggle.active .bar:nth-child(1) {
+  transform: translateY(9px) rotate(45deg);
+}
+
+.navbar-toggle.active .bar:nth-child(2) {
+  opacity: 0;
+}
+
+.navbar-toggle.active .bar:nth-child(3) {
+  transform: translateY(-9px) rotate(-45deg);
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  .navbar-toggle {
+    display: flex;
+  }
+
+  .navbar-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 70%;
+    height: 100vh;
+    background-color: var(--text-light);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: var(--transition);
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+  }
+
+  .navbar-menu.active {
+    right: 0;
+  }
+
+  .navbar-item {
+    margin: 1.5rem 0;
+  }
+
+  .navbar-link {
+    color: var(--text-color);
+    font-size: 1.2rem;
+  }
+
+  .navbar.scrolled .navbar-menu {
+    background-color: var(--text-light);
+  }
+}
+
+/* Add to Navbar.css */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 1.5rem 0;
+  z-index: 1000;
+  transition: var(--transition);
+  background-color: var(--primary-color);
+  /* Add these new properties */
+  will-change: transform; /* Optimizes fixed positioning */
+  transform: translateZ(0); /* Creates new stacking context */
+}
+
+/* Ensure mobile menu has proper z-index */
+.navbar-menu {
+  z-index: 1002; /* Higher than navbar */
+}
